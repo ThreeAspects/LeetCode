@@ -1,0 +1,21 @@
+update salary set sex=decode(sex,'f','m','m','f');//627
+
+select Max(Salary) as SecondHighestSalary from Employee where Salary<(select Max(Salary) from Employee e);//176
+
+select t1.Id from Weather t1 left join Weather t2 on t1.Temperature>t2.Temperature where t2.RecordDate=t1.RecordDate-1;//197
+
+select * from cinema where mod(id,2)=1 and description!='boring' order by rating desc;//620
+
+select e.Name as Employee from Employee e left join Employee b on e.ManagerId=b.Id where e.Salary>b.Salary;//181
+
+select distinct l.Email from Person l left join Person r on l.Email=r.Email where l.Id!=r.Id;//182
+
+delete o from Person o,Person n where o.Email=n.Email and o.Id>n.Id;//196
+
+select c.Name as Customers from Customers c where c.Id not in (select o.CustomerId from Orders o);//183
+
+select p.FirstName,p.LastName,a.City,a.State from Person p left join Address a on p.PersonId=a.PersonId;//175
+
+select class from courses group by class having(count(distinct student)>=5);//596
+
+select w.name,w.population,w.area from World w where w.area>3000000 or w.population>25000000;//595
