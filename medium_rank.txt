@@ -1,0 +1,28 @@
+select x.score,(select count(distinct score) from Scores where x.score<=score)as Rank
+from Scores x
+order by x.score desc;//178
+
+CREATE FUNCTION getNthHighestSalary(N IN NUMBER) RETURN NUMBER IS
+result NUMBER;
+BEGIN
+    /* Write your PL/SQL query statement below */
+    select distinct e1.Salary into result from Employee e1,Employee e2 where e2.Salary>=e1.Salary group by e1.Salary having count(distinct e2.Salary)=N;
+    RETURN result;
+END;//177
+
+select (case
+when mod(id,2)=1 and id=(select count(1) from seat) then id
+when mod(id,2)=1 then id+1 
+else id-1
+end)as id,student from seat order by id;//626
+
+select d.Name as Department,e.Name as Employee,e.Salary as Salary 
+from
+Employee e inner join Department d
+on e.DepartmentId=d.Id
+where e.Salary=(select Max(Salary) from Employee where DepartmentId=e.DepartmentId);//184
+
+select distinct(l1.Num) as ConsecutiveNums from Logs l1,Logs l2
+where l1.Num=l2.Num and l2.Id<=l1.Id+2 and l2.Id>=l1.Id 
+group by l2.Id,l1.Num 
+having count(1)>=3; //180
