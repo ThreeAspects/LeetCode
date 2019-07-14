@@ -1,0 +1,27 @@
+public static int calPoints(String[] ops) {
+	        Stack<Integer> stack=new Stack<Integer>();
+	        int sum=0;
+	        for(String s:ops){
+	         if(s.equals("+")){
+	             int first=stack.pop();
+	             int second=stack.pop();
+	             sum+=first+second;
+	             stack.push(second);
+	             stack.push(first);
+	             stack.push(first+second);
+	         }else if(s.equals("D")){
+	           int num=stack.peek()*2;
+	           stack.push(num);
+	           sum+=num;
+	         }else if(s.equals("C")){
+	             sum-=stack.peek();
+	             stack.pop();
+	         }else{
+	             int num=Integer.valueOf(s);
+	             stack.push(num);
+	             sum+=num;
+	         } 
+	         System.out.println(sum);
+	        }
+	        return sum;
+	    }
