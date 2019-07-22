@@ -1,0 +1,48 @@
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val,List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Iterator;
+class Solution {
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> result=new ArrayList<List<Integer>>();
+        if(root==null){
+            return result;
+        }
+        LinkedList<Node> list=new LinkedList<Node>();
+        list.addLast(null);
+        list.addLast(root);
+        List<Integer> temp=new ArrayList<Integer>();
+        while(list.size()!=1){
+            Node node=list.removeFirst();
+            if(node==null){
+                Iterator<Node> iterator=list.iterator();
+                while(iterator.hasNext()){
+                    temp.add(iterator.next().val);
+                }
+                result.add(new ArrayList<Integer>(temp));
+                list.addLast(null);
+                temp.clear();
+                continue;
+            }
+            Iterator<Node> it=node.children.iterator();
+            while(it.hasNext()){
+                list.add(it.next());
+            }
+        }
+        return result;
+    }
+}
