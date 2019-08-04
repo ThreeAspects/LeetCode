@@ -1,0 +1,24 @@
+import java.util.HashMap;
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashMap<Integer,Integer> map=new HashMap<Integer,Integer>();
+        for(int i:nums1){
+            map.put(i,1);
+        }
+         int count=0;
+        for(int j:nums2){
+            if(map.containsKey(j)&&map.get(j)!=2){
+                count++;
+                map.put(j,2);
+            }
+        }
+        int[] re=new int[count];
+        int in=0;
+        for(Map.Entry m:map.entrySet()){
+            if((Integer)m.getValue()==2){
+                re[in++]=(Integer)m.getKey();
+            }
+        }
+        return re;
+    }
+}
