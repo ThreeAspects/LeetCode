@@ -1,0 +1,42 @@
+import java.util.HashMap;
+import java.util.ArrayList;
+class Solution {
+    public List<String> commonChars(String[] A) {
+        HashMap<Character,Integer> m2=new HashMap<Character,Integer>();
+        boolean flag=true;
+        for(int i=0;i<A.length;i++){
+            char[] cs=A[i].toCharArray();
+            HashMap<Character,Integer> m1=new HashMap<Character,Integer>();
+            for(int j=0;j<cs.length;j++){
+                if(m1.containsKey(cs[j])){
+                    m1.put(cs[j],(m1.get(cs[j])+1));
+                }else{
+                    m1.put(cs[j],1);
+                }
+            }
+            if(flag){
+                m2=m1;
+                flag=false;
+            }else{
+                for(Map.Entry e2:m2.entrySet()){
+                    if(m1.containsKey(e2.getKey())) {
+                    	if((Integer)e2.getValue()>m1.get(e2.getKey())){
+                    		m2.put((Character)e2.getKey(),m1.get(e2.getKey()));
+                    	}	
+                    }else {
+                    	m2.put((Character)e2.getKey(),0);
+                    }
+                }
+            }
+        }
+        ArrayList<String> result=new ArrayList<String>();
+        for(Map.Entry<Character,Integer> e2:m2.entrySet()){
+           int count=(Integer)e2.getValue();
+            while(count>0){
+                result.add(e2.getKey().toString());
+                count--;
+            }
+        }
+        return result;
+    }
+}
