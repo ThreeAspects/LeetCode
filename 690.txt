@@ -1,0 +1,31 @@
+/*
+// Employee info
+class Employee {
+    // It's the unique id of each node;
+    // unique id of this employee
+    public int id;
+    // the importance value of this employee
+    public int importance;
+    // the id of direct subordinates
+    public List<Integer> subordinates;
+};
+*/
+import java.util.HashMap;
+import java.util.ArrayList;
+class Solution {
+    public int getImportance(List<Employee> employees, int id) {
+	    if(employees.size()==0){return 0;}
+	    Employee em=new Employee();
+		for(Employee e:employees){
+		   if(e.id==id){
+		      em=e;
+			  break;
+		   }
+		}
+		int sum=em.importance;
+		for(Integer i:em.subordinates){
+		  sum+=getImportance(employees,i);
+		}
+		return sum;
+    }
+}

@@ -1,0 +1,32 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+class Solution {
+    public static List<String> subdomainVisits(String[] cpdomains) {
+        List<String> list=new ArrayList<String>();
+        HashMap<String,Integer> map=new HashMap<String,Integer>();
+        for(int i=0;i<cpdomains.length;i++) {
+        	String[] strs=cpdomains[i].split(" ");
+        	int count=Integer.valueOf(strs[0]);
+        	String[] word=strs[1].split("\\.");
+        	String temp="";
+        	for(int j=word.length-1;j>=0;j--) {
+        		if(temp.equals("")) {
+        			temp=word[j];
+        		}else {
+        			temp=word[j]+"."+temp;
+        		}
+        		if(map.containsKey(temp)) {
+        			map.put(temp,count+(Integer)map.get(temp));
+        		}else {
+        			map.put(temp,count);
+        		}
+        	}
+        }
+        for(Map.Entry<String, Integer> m:map.entrySet()) {
+        	String re=m.getValue()+" "+m.getKey();
+        	list.add(re);
+        }
+        return list;
+    }
+}
