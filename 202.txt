@@ -1,0 +1,20 @@
+import java.util.HashMap;
+class Solution {
+    HashMap<Integer,Integer> map=new HashMap<Integer,Integer>();
+    public boolean isHappy(int n) {
+        if(n==1){
+            return true;
+        }
+        if(map.containsKey(n)){
+            return false;
+        }else{
+            map.put(n,1);
+        }
+        int num=0;
+        while(n>0){
+            num+=Math.pow(n%10,2);
+            n=n/10;
+        }
+        return isHappy(num);
+    }
+}
