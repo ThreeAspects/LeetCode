@@ -1,0 +1,36 @@
+import java.util.HashMap;
+class Solution {
+    public int longestPalindrome(String s) {
+        HashMap<Character,Integer> map=new HashMap<Character,Integer>();
+        char[] str=s.toCharArray();
+        for(char i:str){
+            if(map.containsKey(i)){
+                map.put(i,map.get(i)+1);
+            }else{
+                map.put(i,1);
+            }
+        }
+        int result=0;
+        int max=0;
+        boolean f=false;
+        for(Map.Entry<Character,Integer> m:map.entrySet()){
+            int l=(Integer)m.getValue();
+            if(l%2==0){
+                result+=l;
+            }else{
+                if(l>max){
+                    max=l;
+                    if(!f){
+                        result=result+l;
+                        f=true;
+                    }else{
+                     result=result+l-1;   
+                    }
+                }else{
+                    result+=l-1;
+                }
+            }
+        }
+        return result;
+    }
+}

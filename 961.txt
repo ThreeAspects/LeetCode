@@ -1,0 +1,12 @@
+import java.util.Arrays;
+class Solution {
+    public int repeatedNTimes(int[] A) {
+        Arrays.sort(A);
+        int l=A.length;
+        if(A[l/2]==A[l-1]){
+            return A[l/2];
+        }else{
+            return A[l/2-1];
+        }
+    }
+}
