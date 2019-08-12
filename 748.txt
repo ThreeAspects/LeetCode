@@ -1,0 +1,42 @@
+class Solution {
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+         Map<Character, Integer> map = new HashMap<>();
+        String lp = licensePlate.toLowerCase(); //转化为小写
+        String result = "";
+        int lpLen = 0;
+        for (char c : lp.toCharArray()) {
+            if (c >= 'a' && c <= 'z') {
+                map.put(c, map.containsKey(c) ? map.get(c) + 1 : 1);
+                lpLen++; //licensePlate中字母总数
+            }
+        }
+        int shortestSize = 15;
+        
+        for (String s : words) {
+            // 如果该字符串长度小于licensePlate中字母总数，
+            //或者该字符串长度大于等于已找到的字符串的长度，则忽略该字符串。
+            if (s.length() < lpLen || s.length() >= shortestSize)
+                continue;
+            int[] table = new int[26];
+            // 对字符串的字母进行统计
+            for (char c : s.toCharArray()) 
+                table[c-'a']++;
+            
+            boolean flag = false; //符合条件的标志
+            for (char c : map.keySet()) {
+                if (table[c-'a'] == 0 || map.get(c) > table[c-'a']) { //字母数量无法匹配
+                    
+                    flag = false;
+                    break;
+                } else 
+                    flag = true;
+            
+            }
+            if (flag) {
+                shortestSize = s.length(); //更新最短长度。
+                result = s;
+            }
+        }
+        return result;
+    }
+}
