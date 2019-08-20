@@ -1,0 +1,16 @@
+class Solution {
+    public int minDeletionSize(String[] A) {
+        int count = 0;
+        for (int j = 0; j < A[0].length(); j++) {
+            char lst = A[0].charAt(j);
+            for (int i = 1; i < A.length; i++) {
+                if (lst > A[i].charAt(j)) {
+                    count++;
+                    break;
+                }
+                lst = A[i].charAt(j);
+            }
+        }
+        return count;
+    }
+}
