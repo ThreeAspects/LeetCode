@@ -1,0 +1,25 @@
+import java.util.Arrays;
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        if(stones.length>1){
+            int i=stones.length-2;
+        int j=stones.length-1;
+         Arrays.sort(stones); 
+        while(stones[i]!=0){
+            if(stones[i]==0){
+                return 0;
+            }
+            if(stones[i]==stones[j]){
+                stones[i]=0;
+                stones[j]=0;
+            }else{
+                int temp=stones[i];
+                stones[i]=0;
+                stones[j]=stones[j]-temp;
+            }
+             Arrays.sort(stones); 
+        }
+        }
+        return stones[stones.length-1];
+    }
+}
