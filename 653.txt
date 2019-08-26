@@ -1,0 +1,27 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean findTarget(TreeNode root, int k) {
+        return my(root.left,root,k)||my(root,root.right,k);
+    }
+    public boolean my(TreeNode r,TreeNode l,int k){
+        if(r==null||l==null){
+            return false;
+        }
+        if(r!=l&&r.val+l.val==k){
+            return true;
+        }else if(r.val+l.val>k){
+            return my(r.left,l,k)||my(r,l.left,k);
+        }else if(r.val+l.val<k){
+            return my(r.right,l,k)||my(r,l.right,k);
+        }
+        return false;
+    }
+}
