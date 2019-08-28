@@ -1,0 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+     public boolean isSubtree(TreeNode s, TreeNode t) {
+        return findSubtree(s,t,t);
+    }
+    
+    public boolean findSubtree(TreeNode s, TreeNode t, TreeNode orit)
+    {
+        if(t!=null && s!=null)
+        {
+            if(s.val==t.val)
+            {
+                // || 判断是给根节点一样，但后续不一样的情况再次判断的机会。此处写得比较粗糙。可以改进（用flag变量）
+                return (findSubtree(s.left, t.left,orit)&&findSubtree(s.right, t.right,orit)) ||  (findSubtree(s.left,t,orit)||findSubtree(s.right,t,orit));
+            }
+            else
+            {
+                return findSubtree(s.left, orit,orit)||findSubtree(s.right, orit,orit);
+            }
+        }
+        else if(t==null && s==null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
