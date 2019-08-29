@@ -1,0 +1,58 @@
+import java.util.Queue;
+import java.util.LinkedList;
+class Solution {
+    class Orange{
+        int x;
+        int y;
+        public Orange(int x, int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+    public int orangesRotting(int[][] grid) {
+        int[] posx = new int[]{1, 0, -1, 0};
+        int[] posy = new int[]{0, 1, 0, -1};
+        int count = 0;
+        int len1 = grid.length;
+        int len2 = grid[0].length;
+        
+        Queue<Orange> queue = new LinkedList();
+        for(int i = 0; i < len1; i++){
+            for(int j = 0; j < len2; j++){
+                if(grid[i][j] == 2){
+                    queue.offer(new Orange(i, j));
+                }
+            }
+        }
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            boolean flag = false;
+            for(int i = 0; i < size; i++){
+                Orange cur = queue.poll();
+                for(int j = 0; j < 4; j++){
+                    if(cur.x + posx[j] < 0 || cur.x + posx[j] >= len1 || 
+                       cur.y + posy[j] < 0 || cur.y + posy[j] >= len2 ||
+                       grid[cur.x + posx[j]][cur.y + posy[j]] != 1){
+                        continue;
+                    }
+                    flag = true;
+                    grid[cur.x + posx[j]][cur.y + posy[j]] = 2;
+                    queue.offer(new Orange(cur.x + posx[j], cur.y + posy[j]));
+                }
+            }
+            if(flag){
+                count ++;
+            }
+        }
+        boolean done = true;
+        for(int i = 0; i < len1; i++){
+            for(int j = 0; j < len2; j++){
+                if(grid[i][j] == 1){
+                    done = false;
+                    return -1;
+                }
+            }
+        }
+        return count;
+    }
+}

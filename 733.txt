@@ -1,0 +1,36 @@
+class Solution {
+    //复制一份，作为标志位存在 标识是否遍历过
+    int[][] copyOne = null;
+    //原位置的颜色
+    int oldColor = 0;
+    //新颜色
+    int newC = 0;
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int x = image[0].length;
+        int y = image.length;
+        copyOne = new int[y][x];
+        oldColor = image[sr][sc];
+        newC = newColor; 
+        dfs(image, sr, sc);
+        return image;
+    }
+    
+    public void dfs(int[][] image, int cur1, int cur2){
+        //先行检验，越界或遍历过的直接跳过
+        if(cur1 < 0 || cur1 >= image.length || cur2 < 0 || cur2 >= image[0].length || copyOne[cur1][cur2] == 1){
+            return;
+        }
+        //如果符合原颜色 修改 不然跳过
+        if(image[cur1][cur2] == oldColor){
+            image[cur1][cur2] = newC;
+            copyOne[cur1][cur2] = 1;
+        }else{
+            return;
+        }
+        //向上下左右进发
+        dfs(image, cur1 + 1, cur2);
+        dfs(image, cur1 - 1, cur2);
+        dfs(image, cur1, cur2 + 1);
+        dfs(image, cur1, cur2 - 1);
+    }
+}
