@@ -1,0 +1,19 @@
+f(k)=从前k个房屋中能抢劫到的最大数额，Ai=第i个房屋的钱数。
+首先看n=1的情况显然f(1)=A1
+再看n=2，f(2)=max(A1，A2)。
+对于n=3，有两个选项:
+1、抢第三个房子，将数额与第一个房子相加。
+2、不抢第三个房子，保持现有最大数额。
+显然，你想选择数额更大的选项。于是，可以总结出公式：
+f(k) = max(f(k – 2)+Ak,f(k – 1))
+我们选择f(–1)=f(0)=0为初始情况，这将极大地简化代码。
+public int rob(int[] num) {
+    int prevMax = 0;
+    int currMax = 0;
+    for (int x : num) {
+        int temp = currMax;
+        currMax = Math.max(prevMax + x, currMax);
+        prevMax = temp;
+    }
+    return currMax;
+}
