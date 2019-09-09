@@ -1,0 +1,30 @@
+class Solution {
+    public int surfaceArea(int[][] grid) {
+        int sum = 0 ;   //计算正方体总个数
+
+        int cnt = 0 ;   //计算所有接触面的个数
+        for(int i=0;i<grid.length;i++)
+        {
+            for(int j=0;j<grid[0].length;j++)
+            {
+                sum += grid[i][j];    
+                cnt += grid[i][j]>=1?grid[i][j]-1:0;   
+//这里有个坑，开始用的 cnt +=grid[i][j] - 1 ,如果这个位置没有放正方体，就等于加了个负数，所以加个判断。
+                if(i==grid.length-1&&j<grid[0].length-1)    //最下面一列，只和右边比较
+                {
+                    cnt += grid[i][j]>grid[i][j+1] ? grid[i][j+1]:grid[i][j];
+                }
+                else if(j==grid[0].length-1 && i<grid[0].length-1)  //    最右边一列，只和下边比较
+                {
+                    cnt += grid[i][j]>grid[i+1][j] ? grid[i+1][j]:grid[i][j];
+                }
+                else if(i!=grid.length-1 && j!=grid[0].length)    //其他列和右边、下边比较，最后一个位置（N-1,N-1）不需要比较了。
+                {
+                    cnt += grid[i][j]>grid[i][j+1] ? grid[i][j+1]:grid[i][j];
+                    cnt += grid[i][j]>grid[i+1][j] ? grid[i+1][j]:grid[i][j];
+                }
+            }
+        }
+        return sum*6 - cnt*2;
+    }
+}
