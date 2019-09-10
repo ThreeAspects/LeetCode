@@ -1,0 +1,18 @@
+class Solution {
+    public int[] sortArrayByParity(int[] A) {
+     int[] re=new int[A.length];
+     int index=0;
+     ArrayList<Integer> list=new ArrayList<>();
+     for(int i=0;i<A.length;i++){
+         if(A[i]%2==0){
+             re[index++]=A[i];
+         }else{
+             list.add(A[i]);
+         }
+     }
+     for(int i:list){
+         re[index++]=i;
+     }   
+     return re;
+    }
+}

@@ -1,0 +1,22 @@
+首先考虑字符串中的第一个字母。如果 S[0] == 'I'，那么我们只要令 A[0] = 0，就一定能满足 A[0] < A[1]。
+如果 S[0] == 'D'，同样我们只要令 A[0] = N，就一定能满足 A[0] > A[1]。
+接下来，当我们考虑 S 中剩下的 N - 1 个字母时，还剩下 N 个数可以使用，这 N 个数为 [0 .. N - 1] 或 [1 .. N]。
+可以发现，由于 S[0] 的值已经确定，那么剩下 S 中的 N - 1 个字母和 N 个可用的数变成了一个和原问题相同，但规模为 N - 1 的问题。
+即如果 S[1] == 'I'，我们就令 A[1] 为剩下数中最小的那个数；如果 S[1] == 'D'，我们就令 A[1] 为剩下数中最大的那个数。
+
+class Solution {
+    public int[] diStringMatch(String S) {
+        int N = S.length();
+        int lo = 0, hi = N;
+        int[] ans = new int[N + 1];
+        for (int i = 0; i < N; ++i) {
+            if (S.charAt(i) == 'I')
+                ans[i] = lo++;
+            else
+                ans[i] = hi--;
+        }
+
+        ans[N] = lo;
+        return ans;
+    }
+}
