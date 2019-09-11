@@ -1,0 +1,8 @@
+class Solution {
+    public int smallestRangeI(int[] A, int K) {
+        Arrays.sort(A);
+        int min=A[0],max=A[A.length-1];
+        int re=max-min-2*K;
+        return re<0? 0:re;
+    }
+}

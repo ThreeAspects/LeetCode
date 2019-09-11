@@ -1,0 +1,19 @@
+class Solution {
+    public int[][] transpose(int[][] A) {
+        int[][] re=new int[A[0].length][A.length];
+        int row=0,col=0;
+        for(int i=0;i<A.length;i++){
+            for(int j=0;j<A[0].length;j++){
+                if(i==j){
+                    re[row++][col]=A[i][j];
+                }else{
+                    re[row][col]=A[i][j];
+                    row++;
+                }
+            }
+            row=0;
+            col++;
+        }
+        return re;
+    }
+}
