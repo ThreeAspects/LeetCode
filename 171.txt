@@ -1,0 +1,11 @@
+class Solution {
+    public int titleToNumber(String s) {
+        char[] str=s.toCharArray();
+        int re=0;
+        for(int i=0;i<str.length;i++){
+            re=re*26;
+            re+=str[i]-'A'+1;
+        }
+        return re;
+    }
+}

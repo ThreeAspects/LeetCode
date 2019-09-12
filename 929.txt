@@ -1,0 +1,26 @@
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        HashSet<String> set=new HashSet<>();
+        for(String s:emails){
+            StringBuffer sb=new StringBuffer();
+            int at=s.indexOf("@");
+            String yuming=s.substring(at);
+            s=s.substring(0,at);
+            int jia=s.indexOf("+");
+            if(jia!=-1){
+                 s=s.substring(0,jia);
+            }
+             int dian=s.indexOf(".");
+            if(dian!=-1){
+                String[] str=s.split("\\.");
+                for(String t:str){
+                sb.append(t);
+                }
+            }else{
+                sb.append(s);
+            }
+            set.add(sb.toString()+yuming);
+        }
+        return set.size();
+    }
+}

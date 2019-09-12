@@ -1,0 +1,22 @@
+class Solution {
+    public int[] shortestToChar(String S, char C) {
+        int now=S.indexOf(C),next=S.indexOf(C,now+1),j=0;
+        char[] str=S.toCharArray();
+        int[] re=new int[str.length];
+        for(;j<str.length;j++){
+            if(next==-1){
+                re[j]=Math.abs(j-now);
+            }else{
+                 if(j<=now){
+                re[j]=now-j;
+            }else if(j>now&&j<next){
+                re[j]=Math.min(j-now,next-j);
+            }else if(j==next){
+                now=next;
+                next=S.indexOf(C,now+1);
+            }
+            }
+        }
+        return re;
+    }
+}
