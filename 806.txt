@@ -1,0 +1,18 @@
+class Solution {
+    public int[] numberOfLines(int[] widths, String S) {
+        char[] str=S.toCharArray();
+        int sum=0;
+        int[] re=new int[2];
+        for(int i=0;i<str.length;i++){
+            sum+=widths[str[i]-'a'];
+            re[1]+=widths[str[i]-'a'];
+            if(sum>100){
+                re[0]++;
+                sum=widths[str[i]-'a'];
+                re[1]=widths[str[i]-'a'];
+            }
+        }
+        re[0]++;
+        return re;
+    }
+}
