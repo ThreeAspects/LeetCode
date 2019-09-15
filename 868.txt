@@ -1,0 +1,27 @@
+class Solution {
+    public int binaryGap(int N) {
+        int max=0,now=0,pre=0,index=0,count=0;
+        boolean flag=true;
+        while(N>0){
+            index++;
+            if((N&1)==1){
+                count++;
+                pre=now;
+                now=index;
+                if(flag){
+                    max=1;
+                    flag=false;
+                }else{
+                    max=max>(now-pre)? max:now-pre;
+                }
+            }
+            N>>=1;
+        }
+        System.out.println(now+" "+pre);
+        if(count==1){
+            return 0;
+        }else{
+            return max;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+//还可以通过定义新变量记录points[i]、points[j]、points[k]的坐标以进一步优化时间。思路就是坐标公式+遍历
+
+class Solution {
+    public static double largestTriangleArea(int[][] points) {
+		double ans=0;
+        for(int i=0;i<=points.length-1;i++) {
+        	for(int j=i+1;j<=points.length-1;j++) {
+        		for(int k=j+1;k<=points.length-1;k++) {
+        			double temp=points[i][0]*(points[j][1]-points[k][1])
+        						-points[i][1]*(points[j][0]-points[k][0])
+        						+(points[j][0]*points[k][1]-points[j][1]*points[k][0]);
+        			temp=Math.abs(temp);
+        			if(0.5*temp>ans) ans=0.5*temp;
+        		}
+        	}
+        }
+        return ans;
+    }
+}

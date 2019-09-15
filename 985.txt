@@ -1,0 +1,28 @@
+class Solution {
+    public int[] sumEvenAfterQueries(int[] A, int[][] queries) {
+        int[] re=new int[A.length];
+        int t=sum(A);
+        for(int i=0;i<queries.length;i++){
+            int temp=A[queries[i][1]];
+            A[queries[i][1]]+=queries[i][0];
+            if(Math.abs(temp)%2!=0&&Math.abs(A[queries[i][1]])%2==0){
+                t+=A[queries[i][1]];
+            }else if(Math.abs(temp)%2==0&&Math.abs(A[queries[i][1]])%2==0){
+                t+=queries[i][0];
+            }else if(Math.abs(temp)%2==0&&Math.abs(A[queries[i][1]])%2!=0){
+                t-=temp;
+            }
+            re[i]=t;
+        }
+        return re;
+    }
+    public int sum(int[] A){
+        int re=0;
+        for(int i:A){
+            if(Math.abs(i)%2==0){
+                re+=i;
+            }
+        }
+        return re;
+    }
+}
