@@ -1,0 +1,23 @@
+class Solution {
+    public int rotatedDigits(int N) {
+        int count=0;
+        int[] trans={0,1,5,-1,-1,2,9,-1,8,6};
+        for(int i=1;i<=N;i++){
+            int j=i,x=0,wei=0;
+            while(j>0){
+                if(trans[j%10]!=-1){
+                    x=x+(int)Math.pow(10,wei)*trans[j%10];
+                }else{
+                    x=0;
+                    break;
+                }
+                j=j/10;
+                wei++;
+            }
+            if(x!=i&&x!=0){
+                count++;
+            }
+        }
+        return count;
+    }
+}

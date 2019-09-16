@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+        String s=x+"";
+        char[] str=s.toCharArray();
+        int left=0,right=str.length-1;
+        if(str[left]=='-'){
+            return false;
+        }
+        while(left<right){
+            if(str[left]!=str[right]){
+                return false;
+            }else{
+                left++;
+                right--;
+            }
+        }
+        return true;
+    }
+}

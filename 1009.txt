@@ -1,0 +1,14 @@
+class Solution {
+    public int bitwiseComplement(int N) {
+        if(N==0) return 1;
+        int re=0,count=0;
+        while(N>0){
+            if((N&1)==0){
+                re+=(int)Math.pow(2,count);
+            }
+            count++;
+            N>>=1;
+        }
+        return re;
+    }
+}
