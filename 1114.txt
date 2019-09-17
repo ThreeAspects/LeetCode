@@ -1,0 +1,44 @@
+//典型的执行屏障的问题，可以通过构造屏障来实现
+//需要构造2道屏障，second线程等待first屏障，third线程等待second屏障
+//first 线程会释放 first 屏障，而 second 线程会释放 second 屏障
+//Java 中，我们使用线程等待的方式实现执行屏障，使用释放线程等待的方式实现屏障消除
+//我们使用一个 Ojbect 对象 lock 实现所有执行屏障的锁对象，两个布尔型对象 firstFinished，secondFinished 保存屏障消除的条件。
+
+class Foo {
+    private boolean firstFinished;
+    private boolean secondFinished;
+    private Object lock = new Object();
+    public Foo() {
+     
+    }
+    public void first(Runnable printFirst) throws InterruptedException {
+        synchronized (lock) {
+            // printFirst.run() outputs "first". Do not change or remove this line.
+            printFirst.run();
+            firstFinished = true;
+            lock.notifyAll(); 
+        }
+    }
+    public void second(Runnable printSecond) throws InterruptedException {
+        synchronized (lock) {
+            while (!firstFinished) {
+                lock.wait();
+            }
+        
+            // printSecond.run() outputs "second". Do not change or remove this line.
+            printSecond.run();
+            secondFinished = true;
+            lock.notifyAll();
+        }
+    }
+    public void third(Runnable printThird) throws InterruptedException {
+        synchronized (lock) {
+           while (!secondFinished) {
+                lock.wait();
+            }
+
+            // printThird.run() outputs "third". Do not change or remove this line.
+            printThird.run();
+        } 
+    }
+}
