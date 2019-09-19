@@ -1,0 +1,17 @@
+class Solution {
+    public int distanceBetweenBusStops(int[] distance, int start, int destination) {
+        int z=0,r=0;
+        if(start>destination){
+            int temp=start;
+            start=destination;
+            destination=temp;
+        }
+        for(int i=start;i<destination;i++){
+            z+=distance[i];
+        }
+        for(int i=destination;i<start+distance.length;i++){
+            r+=distance[i%distance.length];
+        }
+        return Math.min(r,z);
+    }
+}
