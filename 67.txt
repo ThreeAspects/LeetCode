@@ -1,0 +1,65 @@
+class Solution {
+    public String addBinary(String a, String b) {
+            char[] A=a.toCharArray(),B=b.toCharArray();
+            int al=A.length,bl=B.length;
+            String re="";
+            int i=al-1,j=bl-1;
+            boolean f=false;
+            for(;i>=0&&j>=0;i--,j--){
+                if(f){
+                    if(A[i]=='1'&&B[j]=='1'){
+                        f=true;
+                        re=1+re;
+                    }else if(A[i]=='0'&&B[j]=='0'){
+                        re=1+re;
+                        f=false;
+                    }else{
+                        re=0+re;
+                        f=true;
+                    }
+                }else{
+                    if(A[i]=='1'&&B[j]=='1'){
+                        f=true;
+                        re=0+re;
+                    }else if(A[i]=='0'&&B[j]=='0'){
+                        re=0+re;
+                    }else{
+                        re=1+re;
+                    }
+                }
+            }
+            if(al>=bl){
+                for(;i>=0;i--){
+                if(f){
+                    if(A[i]=='1'){
+                        f=true;
+                        re=0+re;
+                    }else if(A[i]=='0'){
+                        re=1+re;
+                        f=false;
+                    }
+                }else{
+                    re=A[i]+re;
+                }
+            }
+            }else{
+                for(;j>=0;j--){
+                if(f){
+                    if(B[j]=='1'){
+                        f=true;
+                        re=0+re;
+                    }else if(B[j]=='0'){
+                        re=1+re;
+                        f=false;
+                    }
+                }else{
+                    re=B[j]+re;
+                }
+            }
+            }
+            if(f){
+                re=1+re;
+            }
+            return re;
+    }
+}

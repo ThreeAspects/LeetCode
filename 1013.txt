@@ -1,0 +1,29 @@
+class Solution {
+    public boolean canThreePartsEqualSum(int[] A) {
+        int len=A.length,s=sum(A);
+        if(s%3!=0||len<3){
+            return false;
+        }
+        int target=s/3,left=0,right=len-1;
+            int tl=0;
+            while(tl!=target&&left<right){
+                tl+=A[left++];
+            }
+            int tr=0;
+            while(tr!=target&&right>left){
+                tr+=A[right--];
+            }
+            int x=0;
+            for(int i=left;i<=right;i++){
+                x+=A[i];
+            }
+            return x==target;
+    }
+    public int sum(int[] A){
+        int s=0;
+        for(int a:A){
+            s+=a;
+        }
+        return s;
+    }
+}
