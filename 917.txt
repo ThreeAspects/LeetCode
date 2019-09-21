@@ -1,0 +1,32 @@
+class Solution {
+    public String reverseOnlyLetters(String S) {
+        char[] s=S.toCharArray();
+        int left=0,right=s.length-1;
+        while(left<right){
+            if(check(s[left])){
+                if(check(s[right])){
+                    swap(s,left,right);
+                    left++;
+                    right--;
+                }else{
+                    right--;
+                }
+            }else{
+                left++;
+            }
+        }
+        return new String(s);
+    }
+    public boolean check(char m){
+        if((m>='a'&&m<='z')||(m>='A'&&m<='Z')){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public void swap(char[] str,int i,int j){
+        char temp=str[i];
+        str[i]=str[j];
+        str[j]=temp;
+    }
+}

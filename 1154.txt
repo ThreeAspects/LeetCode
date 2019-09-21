@@ -1,0 +1,21 @@
+class Solution {
+    public int dayOfYear(String date) {
+        String[] d=date.split("-");
+        int re=Integer.valueOf(d[2]),m=Integer.valueOf(d[1]),y=Integer.valueOf(d[0]);
+        while(m>1){
+            if(m==3){
+                if((y%400==0)||(y%4==0&&y%100!=0)){
+                    re+=29;
+                }else{
+                    re+=28;
+                }
+            }else if(m==2||m==4||m==6||m==8||m==9||m==11){
+                re+=31;
+            }else{
+                re+=30;
+            }
+            m--;
+        }
+        return re;
+    }
+}
