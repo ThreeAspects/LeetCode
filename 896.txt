@@ -1,0 +1,32 @@
+class Solution {
+    public boolean isMonotonic(int[] A) {
+        if(A.length==1){
+            return true;
+        }
+        boolean z=false,j=false,first=true;
+        for(int i=0;i<A.length-1;i++){
+            if(A[i]==A[i+1]){
+                continue;
+            }else if(A[i]>A[i+1]){
+                if(first){
+                    j=true;
+                    first=false;
+                }else{
+                    if(!j){
+                        return false;
+                    }
+                }
+            }else{
+                if(first){
+                    z=true;
+                    first=false;
+                }else{
+                    if(!z){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}

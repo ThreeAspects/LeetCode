@@ -1,0 +1,21 @@
+class Solution {
+    public String reverseStr(String s, int k) {
+        String re="";
+        for(int i=0;i<s.length();i=i+2*k){
+            if(i+2*k<s.length()){
+                StringBuffer sb=new StringBuffer();
+                re=re+sb.append(s.substring(i,i+k)).reverse()+s.substring(i+k,i+2*k);
+            }else{
+                int l=s.length()-i;
+                if(l>k){
+                    StringBuffer sb=new StringBuffer();
+                    re=re+sb.append(s.substring(i,i+k)).reverse()+s.substring(i+k,s.length());
+                }else{
+                    StringBuffer sb=new StringBuffer();
+                    re=re+sb.append(s.substring(i,s.length())).reverse();
+                }
+            }
+        }
+        return re;
+    }
+}

@@ -1,0 +1,35 @@
+class Solution {
+    public int[] fairCandySwap(int[] A, int[] B) {
+        int[] re=new int[2];
+        Map<Integer,Integer> ma=new HashMap<>();
+        Map<Integer,Integer> mb=new HashMap<>();
+        int sa=0,sb=0;
+        for(int a:A){
+            sa+=a;
+            ma.put(a,1);
+        }
+        for(int b:B){
+            sb+=b;
+            mb.put(b,1);
+        }
+        int c=sa-sb,x=Math.abs(c)/2;
+        if(c>0){
+            for(int i:A){
+                if(mb.containsKey(i-x)){
+                    re[0]=i;
+                    re[1]=i-x;
+                    return re;
+                }
+            }
+        }else{
+            for(int i:A){
+                if(mb.containsKey(i+x)){
+                    re[0]=i;
+                    re[1]=i+x;
+                    return re;
+                }
+            }
+        }
+        return re;
+    }
+}
