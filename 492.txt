@@ -1,0 +1,19 @@
+class Solution {
+    public int[] constructRectangle(int area) {
+        int L=area,W=1;
+        int[] re=new int[2];
+        re[0]=L;
+        re[1]=W;
+        while(L>=W){
+            W++;
+            while(L>W&&(L*W>area)){
+                L--;
+            }
+            if(L*W==area&&L>=W){
+                re[0]=L;
+                re[1]=W;
+            }
+        }
+        return re;
+    }
+}
