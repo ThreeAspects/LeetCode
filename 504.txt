@@ -1,0 +1,18 @@
+class Solution {
+    public String convertToBase7(int num) {
+        if(num==0) return "0";
+        boolean is=false;
+        if(num<0) is=true;
+        num=Math.abs(num);
+        StringBuffer re=new StringBuffer();
+        while(num>0){
+            re.append(""+num%7);
+            num=num/7;
+        }
+        if(!is){
+            return re.reverse().toString();
+        }else{
+            return "-"+re.reverse().toString();
+        }
+    }
+}

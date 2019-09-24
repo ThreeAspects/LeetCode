@@ -1,0 +1,40 @@
+class Solution {
+    public int countBinarySubstrings(String s) {
+        int one=0,zero=0,i=0,count=0;
+        boolean oneFirst=false;
+        if(s.charAt(0)=='1'){
+            oneFirst=true;
+        }
+        while(i<s.length()){
+            while(i<s.length()&&s.charAt(i)=='0'){
+                zero++;
+                i++;
+            }
+            if(one!=0&&zero!=0){
+                count+=(zero<=one)? zero:one;
+                if(!oneFirst){
+                    zero=0;
+                    oneFirst=true;
+                }else{
+                    one=0;
+                    oneFirst=false;
+                }
+            }
+            while(i<s.length()&&s.charAt(i)=='1'){
+                one++;
+                i++;
+            }
+            if(one!=0&&zero!=0){
+                count+=(zero<=one)? zero:one;
+                if(!oneFirst){
+                    zero=0;
+                    oneFirst=true;
+                }else{
+                    one=0;
+                    oneFirst=false;
+                }
+            }
+        }
+        return count;
+    }
+}
