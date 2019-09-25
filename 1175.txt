@@ -1,0 +1,25 @@
+class Solution {
+    public int numPrimeArrangements(int n) {
+        int sum = 0;
+        for(int i=1;i<=n;++i){
+            boolean flag = true;
+            for(int j=2;j<=Math.sqrt(i);++j){
+                if(i%j==0){
+                    flag = !flag;
+                    break;
+                }
+            }
+            if(flag)
+                sum++;
+            }
+            sum--;
+            long res=1;
+            for(int i=sum;i>=1;--i){
+                res = res * i % 1000000007;
+            }
+            for(int i = n-sum;i>=1;--i )
+                res = res * i % 1000000007;
+                return (int)res;
+            }
+        
+        }

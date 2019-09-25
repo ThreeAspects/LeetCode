@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> largeGroupPositions(String S) {
+        List<List<Integer>> re=new ArrayList<List<Integer>>();
+        char[] s=S.toCharArray();
+        int i=0;
+        while(i<S.length()){
+            int start=i,end=start;
+            char tag=s[start];
+            i++;
+            while(i<S.length()&&tag==s[i]){
+                end++;
+                i++;
+            }
+            if(end-start>=2){
+                List<Integer> list=new ArrayList<>();
+                list.add(start);
+                list.add(end);
+                re.add(new ArrayList<Integer>(list));
+            }
+        }
+        return re;
+    }
+}
