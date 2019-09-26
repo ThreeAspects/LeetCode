@@ -1,0 +1,33 @@
+class Solution {
+    public int findLHS(int[] nums) {
+        if(nums.length==0) return 0;
+        Arrays.sort(nums);
+        int max=0,temp=0,now=0;
+        int x=nums[0];
+        boolean first=true;
+        for(int i=0;i<nums.length;){
+            if(first){
+                while(i<nums.length&&nums[i]==x){
+                    i++;
+                    now++;
+                }
+                first=false;
+                temp=now;
+                now=0;
+            }else{
+                int t=nums[i];
+                x=nums[i-1];
+                while(i<nums.length&&nums[i]==t){
+                    now++;
+                    i++;
+                }
+                if(t-x==1){
+                    max=(max<(temp+now))? temp+now:max;
+                }
+                temp=now;
+                now=0;
+            }
+        }
+        return max>1? max:0;
+    }
+}

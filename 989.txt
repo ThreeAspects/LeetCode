@@ -1,0 +1,31 @@
+class Solution {
+    public List<Integer> addToArrayForm(int[] A, int K) {
+        ArrayList<Integer> list=new ArrayList<>();
+        int i=A.length-1;
+        int jinwei=0;
+        while(K>0&&i>=0){
+            int now=A[i]+K%10+jinwei;
+            jinwei=now/10;
+            K=K/10;
+            i--;
+            list.add(now%10);
+        }
+        while(K>0){
+            int now=K%10+jinwei;
+            jinwei=now/10;
+            K=K/10;
+            list.add(now%10);
+        }
+        while(i>=0){
+            int now=A[i]+jinwei;
+            jinwei=now/10;
+            i--;
+            list.add(now%10);
+        }
+        if(jinwei!=0){
+            list.add(jinwei);
+        }
+        Collections.reverse(list);
+        return list;
+    }
+}
