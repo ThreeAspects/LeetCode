@@ -1,0 +1,12 @@
+如果每步计算 2 的幂，结果会越来越大，java 没有基本类型可以承受如此大的结果考虑采用每次结果的模进行计算
+class Solution {
+    public List<Boolean> prefixesDivBy5(int[] A) {
+		List<Boolean> list = new ArrayList<>(A.length);
+		int mod = 0;
+		for(int i = 0;i<A.length;i++) {
+			mod = (mod << 1)%5 + (A[i] == 1 ? 1 : 0);
+			list.add(mod%5==0);
+		}
+        return list;
+    }
+}

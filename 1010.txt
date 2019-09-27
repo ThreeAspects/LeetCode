@@ -1,0 +1,12 @@
+class Solution {
+    public int numPairsDivisibleBy60(int[] time) {
+        int count = 0;
+        int[] index = new int[60];
+        for (int n : time) {
+            // 最后还要取模60，是因为(60 - n % 60)的值有可能等于60，而对于我们声明的数组来说，60已经越界了
+            count += index[(60 - n % 60) % 60];
+            index[n % 60]++;
+        }
+        return count;
+    }
+}

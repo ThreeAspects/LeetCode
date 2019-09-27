@@ -1,0 +1,29 @@
+class Solution {
+    public int[] fraction(int[] cont) {
+        int[] fenshu=new int[2];
+        fenshu[0]=1;
+        fenshu[1]=cont[cont.length-1];
+        for(int i=cont.length-2;i>=0;i--){
+            fenshu=caculate(cont[i],fenshu);
+        }
+        int i=2;
+        while(i<=fenshu[0]&&i<=fenshu[1]){
+            if(fenshu[0]%i==0&&fenshu[1]%i==0){
+                fenshu[0]=fenshu[0]/i;
+                fenshu[1]=fenshu[1]/i;
+            }
+            i++;
+        }
+        int temp=fenshu[0];
+        fenshu[0]=fenshu[1];
+        fenshu[1]=temp;
+        return fenshu;
+    }
+    public int[] caculate(int x,int[] fenshu){
+        fenshu[0]=fenshu[0]+x*fenshu[1];
+        int temp=fenshu[0];
+        fenshu[0]=fenshu[1];
+        fenshu[1]=temp;
+        return fenshu;
+    }
+}
