@@ -1,0 +1,19 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        String tag=sort(p);
+        List<Integer> list=new ArrayList<Integer>();
+        for(int i=0;i<=s.length()-p.length();i++){
+            String t=s.substring(i,i+p.length());
+            String temp=sort(t);
+            if(temp.equals(tag)){
+                list.add(i);
+            }
+        }
+        return list;
+    }
+    public String sort(String str){
+        char[] strs=str.toCharArray();
+        Arrays.sort(strs);
+        return String.valueOf(strs);
+    }
+}

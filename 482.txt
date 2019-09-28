@@ -1,0 +1,30 @@
+class Solution {
+    public String licenseKeyFormatting(String S, int K) {
+        String word=toB(S);
+        String[] s=word.split("-");
+        String str="",re="";
+        for(String w:s){
+            str=str+w;
+        }
+        int i=0;
+        for(i=str.length()-K;i>0;i=i-K){
+            re="-"+str.substring(i,i+K)+re;
+        }
+        re=str.substring(0,i+K)+re;
+        return re;
+    }
+    public String toB(String s){
+        int i=0;
+        String re="";
+        while(i<s.length()){
+            if(s.charAt(i)>='a'&&s.charAt(i)<='z'){
+                char c=(char)(s.charAt(i)-32);
+                re=re+c;
+            }else{
+                re=re+s.charAt(i);
+            }
+            i++;
+        }
+        return re;
+    }
+}
