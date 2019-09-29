@@ -1,0 +1,23 @@
+class Solution {
+    public int maxDistToClosest(int[] seats) {
+        int max=-1,pre=0,cur=0,head=0;
+        boolean first=true;
+        for(int i=0;i<seats.length;i++){
+            if(seats[i]==1){
+                pre=cur;
+                cur=i;
+                max=(max<(cur-pre))? cur-pre:max;
+            if(first&&seats[0]==0){
+                head=cur;
+                first=false;
+            }
+            }
+        }
+        if(seats[seats.length-1]==0){
+            max=(max/2<(seats.length-1-cur))? seats.length-1-cur:max/2;
+        }else{
+            max=max/2;
+        }
+        return max<head? head:max;
+    }
+}

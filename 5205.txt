@@ -1,0 +1,19 @@
+class Solution {
+    public boolean uniqueOccurrences(int[] arr) {
+        Set<Integer> set=new HashSet<Integer>();
+        Arrays.sort(arr);
+        for(int i=0;i<arr.length;){
+            int temp=0,t=arr[i];
+            while(i<arr.length&&arr[i]==t){
+                temp++;
+                i++;
+            }
+            if(set.contains(temp)){
+                return false;
+            }else{
+                set.add(temp);
+            }
+        } 
+        return true;
+    }
+}
