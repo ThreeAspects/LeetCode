@@ -1,0 +1,24 @@
+class Solution {
+    public boolean validPalindrome(String s) {
+        char[] str=s.toCharArray();
+        int left=0,right=str.length-1;
+        while(left<right){
+            if(str[left]!=str[right]){
+                return judge(left+1,right,str)||judge(left,right-1,str);
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+    public boolean judge(int i,int j,char[] s){
+        while(i<j){
+            if(s[i]!=s[j]){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+}
