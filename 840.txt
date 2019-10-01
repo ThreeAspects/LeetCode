@@ -1,0 +1,26 @@
+class Solution {
+    public int numMagicSquaresInside(int[][] grid) {
+        if(grid.length<3||grid[0].length<3){
+            return 0;
+        }
+        int count=0;
+        for(int i=0;i<=grid.length-3;i++){
+            for(int j=0;j<=grid[0].length-3;j++){
+                Set<Integer> set=new HashSet<>();
+                for(int k=0;k<3;k++){
+                    for(int l=0;l<3;l++){
+                        if(grid[i+k][j+l]>=1&&grid[i+k][j+l]<=9){
+                        set.add(grid[i+k][j+l]);   
+                        }
+                    }
+                }
+                if(set.size()!=9) continue;
+                int sum=grid[i][j]+grid[i][j+1]+grid[i][j+2];
+                if(grid[i+1][j]+grid[i+1][j+1]+grid[i+1][j+2]==sum&&grid[i+2][j]+grid[i+2][j+1]+grid[i+2][j+2]==sum&&grid[i][j]+grid[i+1][j]+grid[i+2][j]==sum&&grid[i][j+1]+grid[i+1][j+1]+grid[i+2][j+1]==sum&&grid[i][j+2]+grid[i+1][j+2]+grid[i+2][j+2]==sum&&grid[i][j]+grid[i+1][j+1]+grid[i+2][j+2]==sum&&grid[i][j+2]+grid[i+1][j+1]+grid[i+2][j]==sum){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
