@@ -1,0 +1,18 @@
+class Solution {
+    public boolean judgeSquareSum(int c) {
+        int i=(int)Math.sqrt(c);
+        if(i*i==c){
+            return true;
+        }
+        int temp=c;
+        for(int j=i;j>=1;j--){
+            temp=temp-j*j;
+            int t=(int)Math.sqrt(temp);
+            if(temp-t*t==0){
+                return true;
+            }
+            temp=c;
+        }
+        return false;
+    }
+}
